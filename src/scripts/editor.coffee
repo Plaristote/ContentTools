@@ -320,7 +320,7 @@ class _EditorApp extends ContentTools.ComponentUI
 
     mount: () ->
         # Mount the widget to the DOM
-        @_domElement = @constructor.createDiv(['ct-app'])
+        @_domElement = @createDiv(['ct-app'])
         document.body.insertBefore(@_domElement, null)
         @_addDOMEventListeners()
 
@@ -676,7 +676,7 @@ class _EditorApp extends ContentTools.ComponentUI
             # Handle fixtures vs. standard regions
             if snapshot.regions[name] != undefined
                 if region.children.length is 1 and region.children[0].isFixed()
-                    wrapper = @constructor.createDiv()
+                    wrapper = @createDiv()
                     wrapper.innerHTML = snapshot.regions[name]
                     domRegions.push(wrapper.firstElementChild)
                     region.domElement().parentNode.replaceChild(
@@ -758,7 +758,7 @@ class _EditorApp extends ContentTools.ComponentUI
 
                 # Handle fixtures vs. standard regions
                 if region.children.length is 1 and region.children[0].isFixed()
-                    wrapper = @constructor.createDiv()
+                    wrapper = @createDiv()
                     wrapper.innerHTML = html
                     domRegions.push(wrapper.firstElementChild)
                     region.domElement().parentNode.replaceChild(

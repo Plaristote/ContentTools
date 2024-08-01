@@ -22,11 +22,11 @@ class ContentTools.VideoDialog extends ContentTools.DialogUI
         ContentEdit.addCSSClass(@_domView, 'ct-video-dialog__preview')
 
         # Add controls
-        domControlGroup = @constructor.createDiv(['ct-control-group'])
+        domControlGroup = @createDiv(['ct-control-group'])
         @_domControls.appendChild(domControlGroup)
 
         # Input
-        @_domInput = document.createElement('input')
+        @_domInput = @_document.createElement('input')
         @_domInput.setAttribute('class', 'ct-video-dialog__input')
         @_domInput.setAttribute('name', 'url')
         @_domInput.setAttribute(
@@ -37,7 +37,7 @@ class ContentTools.VideoDialog extends ContentTools.DialogUI
         domControlGroup.appendChild(@_domInput)
 
         # Insert button
-        @_domButton = @constructor.createDiv([
+        @_domButton = @createDiv([
             'ct-control',
             'ct-control--text',
             'ct-control--insert'
@@ -56,7 +56,7 @@ class ContentTools.VideoDialog extends ContentTools.DialogUI
         @clearPreview()
 
         # Insert the preview iframe
-        @_domPreview = document.createElement('iframe')
+        @_domPreview = @_document.createElement('iframe')
         @_domPreview.setAttribute('frameborder', '0')
         @_domPreview.setAttribute('height', '100%')
         @_domPreview.setAttribute('src', url)

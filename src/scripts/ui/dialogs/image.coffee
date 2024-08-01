@@ -88,12 +88,12 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
         # Add controls
 
         # Image tools & progress bar
-        domTools = @constructor.createDiv(
+        domTools = @createDiv(
             ['ct-control-group', 'ct-control-group--left'])
         @_domControls.appendChild(domTools)
 
         # Rotate CCW
-        @_domRotateCCW = @constructor.createDiv([
+        @_domRotateCCW = @createDiv([
             'ct-control',
             'ct-control--icon',
             'ct-control--rotate-ccw'
@@ -105,7 +105,7 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
         domTools.appendChild(@_domRotateCCW)
 
         # Rotate CW
-        @_domRotateCW = @constructor.createDiv([
+        @_domRotateCW = @createDiv([
             'ct-control',
             'ct-control--icon',
             'ct-control--rotate-cw'
@@ -117,7 +117,7 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
         domTools.appendChild(@_domRotateCW)
 
         # Rotate CW
-        @_domCrop = @constructor.createDiv([
+        @_domCrop = @createDiv([
             'ct-control',
             'ct-control--icon',
             'ct-control--crop'
@@ -126,19 +126,19 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
         domTools.appendChild(@_domCrop)
 
         # Progress bar
-        domProgressBar = @constructor.createDiv(['ct-progress-bar'])
+        domProgressBar = @createDiv(['ct-progress-bar'])
         domTools.appendChild(domProgressBar)
 
-        @_domProgress = @constructor.createDiv(['ct-progress-bar__progress'])
+        @_domProgress = @createDiv(['ct-progress-bar__progress'])
         domProgressBar.appendChild(@_domProgress)
 
         # Actions
-        domActions = @constructor.createDiv(
+        domActions = @createDiv(
             ['ct-control-group', 'ct-control-group--right'])
         @_domControls.appendChild(domActions)
 
         # Upload button
-        @_domUpload = @constructor.createDiv([
+        @_domUpload = @createDiv([
             'ct-control',
             'ct-control--text',
             'ct-control--upload'
@@ -147,7 +147,7 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
         domActions.appendChild(@_domUpload)
 
         # File input for upload
-        @_domInput = document.createElement('input')
+        @_domInput = @_document.createElement('input')
         @_domInput.setAttribute('class', 'ct-image-dialog__file-upload')
         @_domInput.setAttribute('name', 'file')
         @_domInput.setAttribute('type', 'file')
@@ -155,7 +155,7 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
         @_domUpload.appendChild(@_domInput)
 
         # Insert
-        @_domInsert = @constructor.createDiv([
+        @_domInsert = @createDiv([
             'ct-control',
             'ct-control--text',
             'ct-control--insert'
@@ -164,7 +164,7 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
         domActions.appendChild(@_domInsert)
 
         # Cancel
-        @_domCancelUpload = @constructor.createDiv([
+        @_domCancelUpload = @createDiv([
             'ct-control',
             'ct-control--text',
             'ct-control--cancel'
@@ -173,7 +173,7 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
         domActions.appendChild(@_domCancelUpload)
 
         # Clear
-        @_domClear = @constructor.createDiv([
+        @_domClear = @createDiv([
             'ct-control',
             'ct-control--text',
             'ct-control--clear'
@@ -195,7 +195,7 @@ class ContentTools.ImageDialog extends ContentTools.DialogUI
 
         # Check for existing image, if there isn't one add one
         if not @_domImage
-            @_domImage = @constructor.createDiv(['ct-image-dialog__image'])
+            @_domImage = @createDiv(['ct-image-dialog__image'])
             @_domView.appendChild(@_domImage)
 
         # Set the image to appear
@@ -365,19 +365,19 @@ class CropMarksUI extends ContentTools.AnchoredComponentUI
 
     mount: (domParent, before=null) ->
         # Crop marks
-        @_domElement = @constructor.createDiv(['ct-crop-marks'])
+        @_domElement = @createDiv(['ct-crop-marks'])
 
         # Clippers
-        @_domClipper = @constructor.createDiv(['ct-crop-marks__clipper'])
+        @_domClipper = @createDiv(['ct-crop-marks__clipper'])
         @_domElement.appendChild(@_domClipper)
 
         # Rulers
         @_domRulers = [
-            @constructor.createDiv([
+            @createDiv([
                 'ct-crop-marks__ruler',
                 'ct-crop-marks__ruler--top-left'
                 ]),
-            @constructor.createDiv([
+            @createDiv([
                 'ct-crop-marks__ruler',
                 'ct-crop-marks__ruler--bottom-right'
                 ])
@@ -387,11 +387,11 @@ class CropMarksUI extends ContentTools.AnchoredComponentUI
 
         # Handles
         @_domHandles = [
-            @constructor.createDiv([
+            @createDiv([
                 'ct-crop-marks__handle',
                 'ct-crop-marks__handle--top-left'
                 ]),
-            @constructor.createDiv([
+            @createDiv([
                 'ct-crop-marks__handle',
                 'ct-crop-marks__handle--bottom-right'
                 ])
@@ -531,20 +531,20 @@ class CropMarksUI extends ContentTools.AnchoredComponentUI
         @_onMouseMove = (ev) =>
             @_drag(ev.clientY, ev.clientX)
 
-        document.addEventListener('mousemove', @_onMouseMove)
+        @_document.addEventListener('mousemove', @_onMouseMove)
 
         # Handle any mouse up event (as stop dragging)
         @_onMouseUp = (ev) =>
             @_stopDrag()
 
-        document.addEventListener('mouseup', @_onMouseUp)
+        @_document.addEventListener('mouseup', @_onMouseUp)
 
     _stopDrag: () ->
         # Handle handle/ruler drag stopping
 
         # Remove event handlers
-        document.removeEventListener('mousemove', @_onMouseMove)
-        document.removeEventListener('mouseup', @_onMouseUp)
+        @_document.removeEventListener('mousemove', @_onMouseMove)
+        @_document.removeEventListener('mouseup', @_onMouseUp)
 
         # Unset dragging state
         @_dragging = null

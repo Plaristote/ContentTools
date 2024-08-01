@@ -55,25 +55,25 @@ class ContentTools.ToolboxUI extends ContentTools.WidgetUI
         # Mount the widget to the DOM
 
         # Toolbox
-        @_domElement = @constructor.createDiv([
+        @_domElement = @createDiv([
             'ct-widget',
             'ct-toolbox'
             ])
         @parent().domElement().appendChild(@_domElement)
 
         # Grip
-        @_domGrip = @constructor.createDiv([
+        @_domGrip = @createDiv([
             'ct-toolbox__grip',
             'ct-grip'
             ])
         @_domElement.appendChild(@_domGrip)
 
-        @_domGrip.appendChild(@constructor.createDiv(['ct-grip__bump']))
-        @_domGrip.appendChild(@constructor.createDiv(['ct-grip__bump']))
-        @_domGrip.appendChild(@constructor.createDiv(['ct-grip__bump']))
+        @_domGrip.appendChild(@createDiv(['ct-grip__bump']))
+        @_domGrip.appendChild(@createDiv(['ct-grip__bump']))
+        @_domGrip.appendChild(@createDiv(['ct-grip__bump']))
 
         # Tools
-        @_domToolGroups = @constructor.createDiv(['ct-tool-groups'])
+        @_domToolGroups = @createDiv(['ct-tool-groups'])
         @_domElement.appendChild(@_domToolGroups)
         @tools(@_tools)
 
@@ -116,7 +116,7 @@ class ContentTools.ToolboxUI extends ContentTools.WidgetUI
         for toolGroup, i in @_tools
 
             # Create a group for the tools
-            domToolGroup = @constructor.createDiv(['ct-tool-group'])
+            domToolGroup = @createDiv(['ct-tool-group'])
             @_domToolGroups.appendChild(domToolGroup)
 
             # Create an associated ToolUI compontent for each tool in the group
@@ -308,13 +308,15 @@ class ContentTools.ToolboxUI extends ContentTools.WidgetUI
         unless @isMounted()
             return
 
+        _window = @_document.defaultView
+
         rect = @_domElement.getBoundingClientRect()
 
-        if rect.left + rect.width > window.innerWidth
-            @_domElement.style.left = "#{ window.innerWidth - rect.width }px"
+        if rect.left + rect.width > _window.innerWidth
+            @_domElement.style.left = "#{ _window.innerWidth - rect.width }px"
 
-        if rect.top + rect.height > window.innerHeight
-            @_domElement.style.top = "#{ window.innerHeight - rect.height }px"
+        if rect.top + rect.height > _window.innerHeight
+            @_domElement.style.top = "#{ _window.innerHeight - rect.height }px"
 
         if rect.left < 0
             @_domElement.style.left = '0px'
@@ -325,7 +327,7 @@ class ContentTools.ToolboxUI extends ContentTools.WidgetUI
         # Save the new position to local storage so we can restore it on
         # remount.
         rect = @_domElement.getBoundingClientRect()
-        window.localStorage.setItem(
+        _window.localStorage.setItem(
             'ct-toolbox-position',
             "#{ rect.left },#{ rect.top }"
             )
@@ -377,12 +379,12 @@ class ContentTools.ToolboxUI extends ContentTools.WidgetUI
             }
 
         # Setup dragging behaviour for the element
-        document.addEventListener('mousemove', @_onDrag)
-        document.addEventListener('mouseup', @_onStopDragging)
+        @_document.addEventListener('mousemove', @_onDrag)
+        @_document.addEventListener('mouseup', @_onStopDragging)
 
         # Add dragging class to the body (this class is defined in ContentEdit
         # it disabled content selection via CSS).
-        ContentEdit.addCSSClass(document.body, 'ce--dragging')
+        ContentEdit.addCSSClass(@_document.body, 'ce--dragging')
 
     _onStopDragging: (ev) =>
         # User has finished dragging the toolbox to a new position
@@ -393,8 +395,8 @@ class ContentTools.ToolboxUI extends ContentTools.WidgetUI
         @_contain()
 
         # Remove dragging behaviour
-        document.removeEventListener('mousemove', @_onDrag)
-        document.removeEventListener('mouseup', @_onStopDragging)
+        @_document.removeEventListener('mousemove', @_onDrag)
+        @_document.removeEventListener('mouseup', @_onStopDragging)
 
         # Reset the dragging offset
         @_draggingOffset = null
@@ -405,7 +407,7 @@ class ContentTools.ToolboxUI extends ContentTools.WidgetUI
 
         # Remove dragging class from the body (this class is defined in
         # ContentEdit it disabled content selection via CSS).
-        ContentEdit.removeCSSClass(document.body, 'ce--dragging')
+        ContentEdit.removeCSSClass(@_document.body, 'ce--dragging')
 
 
 class ContentTools.ToolUI extends ContentTools.AnchoredComponentUI
@@ -471,7 +473,7 @@ class ContentTools.ToolUI extends ContentTools.AnchoredComponentUI
     mount: (domParent, before=null) ->
         # Mount the component to the DOM
 
-        @_domElement = @constructor.createDiv([
+        @_domElement = @createDiv([
             'ct-tool',
             "ct-tool--#{ @tool.icon }"
             ])

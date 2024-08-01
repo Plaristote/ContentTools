@@ -24,7 +24,7 @@ class ContentTools.ModalUI extends ContentTools.WidgetUI
         # Mount the widget to the DOM
 
         # Modal
-        @_domElement = @constructor.createDiv([
+        @_domElement = @createDiv([
             'ct-widget',
             'ct-modal'
             ])
@@ -36,7 +36,7 @@ class ContentTools.ModalUI extends ContentTools.WidgetUI
 
         # Unless scrolling is set as allowed disable page scrolling
         if not @_allowScrolling
-            ContentEdit.addCSSClass(document.body, 'ct--no-scroll')
+            ContentEdit.addCSSClass(@_document.body, 'ct--no-scroll')
 
         # Add interaction handlers
         @_addDOMEventListeners()
@@ -46,7 +46,7 @@ class ContentTools.ModalUI extends ContentTools.WidgetUI
 
         # Allow the page to be scrolled again
         if not @_allowScrolling
-            ContentEdit.removeCSSClass(document.body, 'ct--no-scroll')
+            ContentEdit.removeCSSClass(@_document.body, 'ct--no-scroll')
 
         super()
 

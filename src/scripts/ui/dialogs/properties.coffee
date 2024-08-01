@@ -104,7 +104,7 @@ class ContentTools.PropertiesDialog extends ContentTools.DialogUI
         # default it is opened with styles tab showing.
 
         # Styles
-        @_domStyles = @constructor.createDiv(['ct-properties-dialog__styles'])
+        @_domStyles = @createDiv(['ct-properties-dialog__styles'])
         @_domStyles.setAttribute(
             'data-ct-empty',
             ContentEdit._('No styles available for this tag')
@@ -121,7 +121,7 @@ class ContentTools.PropertiesDialog extends ContentTools.DialogUI
             styleUI.mount(@_domStyles)
 
         # Attributes
-        @_domAttributes = @constructor.createDiv(
+        @_domAttributes = @createDiv(
             ['ct-properties-dialog__attributes'])
         @_domView.appendChild(@_domAttributes)
 
@@ -153,11 +153,11 @@ class ContentTools.PropertiesDialog extends ContentTools.DialogUI
         @_addAttributeUI('', '')
 
         # Code
-        @_domCode = @constructor.createDiv(['ct-properties-dialog__code'])
+        @_domCode = @createDiv(['ct-properties-dialog__code'])
         @_domView.appendChild(@_domCode)
 
         # Add a textarea in which the inner HTML can be edited
-        @_domInnerHTML = document.createElement('textarea')
+        @_domInnerHTML = @_document.createElement('textarea')
         @_domInnerHTML.setAttribute('class', 'ct-properties-dialog__inner-html')
         @_domInnerHTML.setAttribute('name', 'code')
         @_domInnerHTML.value = @getElementInnerHTML()
@@ -166,12 +166,12 @@ class ContentTools.PropertiesDialog extends ContentTools.DialogUI
         # Controls
 
         # Tabs
-        domTabs = @constructor.createDiv(
+        domTabs = @createDiv(
             ['ct-control-group', 'ct-control-group--left'])
         @_domControls.appendChild(domTabs)
 
         # Styles
-        @_domStylesTab = @constructor.createDiv([
+        @_domStylesTab = @createDiv([
             'ct-control',
             'ct-control--icon',
             'ct-control--styles'
@@ -180,7 +180,7 @@ class ContentTools.PropertiesDialog extends ContentTools.DialogUI
         domTabs.appendChild(@_domStylesTab)
 
         # Attributes
-        @_domAttributesTab = @constructor.createDiv([
+        @_domAttributesTab = @createDiv([
             'ct-control',
             'ct-control--icon',
             'ct-control--attributes'
@@ -192,7 +192,7 @@ class ContentTools.PropertiesDialog extends ContentTools.DialogUI
         domTabs.appendChild(@_domAttributesTab)
 
         # Code
-        @_domCodeTab = @constructor.createDiv([
+        @_domCodeTab = @createDiv([
             'ct-control',
             'ct-control--icon',
             'ct-control--code'
@@ -204,7 +204,7 @@ class ContentTools.PropertiesDialog extends ContentTools.DialogUI
             ContentEdit.addCSSClass(@_domCodeTab, 'ct-control--muted')
 
         # Remove attribute control
-        @_domRemoveAttribute = @constructor.createDiv([
+        @_domRemoveAttribute = @createDiv([
             'ct-control',
             'ct-control--icon',
             'ct-control--remove',
@@ -217,11 +217,11 @@ class ContentTools.PropertiesDialog extends ContentTools.DialogUI
         domTabs.appendChild(@_domRemoveAttribute)
 
         # Actions
-        domActions = @constructor.createDiv(
+        domActions = @createDiv(
             ['ct-control-group', 'ct-control-group--right'])
         @_domControls.appendChild(domActions)
 
-        @_domApply = @constructor.createDiv([
+        @_domApply = @createDiv([
             'ct-control',
             'ct-control--text',
             'ct-control--apply'
@@ -496,17 +496,17 @@ class StyleUI extends ContentTools.AnchoredComponentUI
         # Mount the component to the DOM
 
         # Section
-        @_domElement = @constructor.createDiv(['ct-section'])
+        @_domElement = @createDiv(['ct-section'])
         if @_applied
             ContentEdit.addCSSClass(@_domElement, 'ct-section--applied')
 
         # Label
-        label = @constructor.createDiv(['ct-section__label'])
+        label = @createDiv(['ct-section__label'])
         label.textContent = @style.name()
         @_domElement.appendChild(label)
 
         # Switch
-        @_domElement.appendChild(@constructor.createDiv(['ct-section__switch']))
+        @_domElement.appendChild(@createDiv(['ct-section__switch']))
 
         super(domParent, before)
 
@@ -550,10 +550,10 @@ class AttributeUI extends ContentTools.AnchoredComponentUI
         # Mount the component to the DOM
 
         # Attribute
-        @_domElement = @constructor.createDiv(['ct-attribute'])
+        @_domElement = @createDiv(['ct-attribute'])
 
         # Name
-        @_domName = document.createElement('input')
+        @_domName = @_document.createElement('input')
         @_domName.setAttribute('class', 'ct-attribute__name')
         @_domName.setAttribute('name', 'name')
         @_domName.setAttribute('placeholder', ContentEdit._('Name'))
@@ -562,7 +562,7 @@ class AttributeUI extends ContentTools.AnchoredComponentUI
         @_domElement.appendChild(@_domName)
 
         # Value
-        @_domValue = document.createElement('input')
+        @_domValue = @_document.createElement('input')
         @_domValue.setAttribute('class', 'ct-attribute__value')
         @_domValue.setAttribute('name', 'value')
         @_domValue.setAttribute('placeholder', ContentEdit._('Value'))

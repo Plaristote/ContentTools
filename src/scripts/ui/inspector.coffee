@@ -14,18 +14,18 @@ class ContentTools.InspectorUI extends ContentTools.WidgetUI
         # Mount the widget to the DOM
 
         # Inspector
-        @_domElement = @constructor.createDiv(['ct-widget', 'ct-inspector'])
+        @_domElement = @createDiv(['ct-widget', 'ct-inspector'])
         @parent().domElement().appendChild(@_domElement)
 
         # Tags
-        @_domTags = @constructor.createDiv([
+        @_domTags = @createDiv([
             'ct-inspector__tags',
             'ct-tags'
             ])
         @_domElement.appendChild(@_domTags)
 
         # Counter
-        @_domCounter = @constructor.createDiv(['ct-inspector__counter'])
+        @_domCounter = @createDiv(['ct-inspector__counter'])
         @_domElement.appendChild(@_domCounter)
         @updateCounter()
 
@@ -188,7 +188,7 @@ class ContentTools.TagUI extends ContentTools.AnchoredComponentUI
     mount: (domParent, before=null) ->
         # Mount the component to the DOM
 
-        @_domElement = @constructor.createDiv(['ct-tag'])
+        @_domElement = @createDiv(['ct-tag'])
         @_domElement.textContent = @element.tagName()
 
         super(domParent, before)

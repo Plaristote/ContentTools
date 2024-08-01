@@ -22,7 +22,7 @@ class ContentTools.FlashUI extends ContentTools.AnchoredComponentUI
         # flash.
 
         # Create the flash
-        @_domElement = @constructor.createDiv([
+        @_domElement = @createDiv([
             'ct-flash',
             'ct-flash--active',
             "ct-flash--#{ modifier }",

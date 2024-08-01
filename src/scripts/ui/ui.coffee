@@ -17,6 +17,9 @@ class ContentTools.ComponentUI
         # The DOM element associated with this component
         @_domElement = null
 
+        # The document featuring UI elements
+        @_document = document
+
     # Read-only methods
 
     children: () ->
@@ -155,13 +158,13 @@ class ContentTools.ComponentUI
     _removeDOMEventListeners: () ->
         # Remove all event bindings for the DOM element in this method
 
-    @createDiv: (classNames, attributes, content) ->
+    createDiv: (classNames, attributes, content) ->
         # All UI components are constructed entirely from one or more nested
         # <div>s, this class method provides a shortcut for creating a <div>
         # including the initial CSS class names, attributes and content.
 
         # Create the element
-        domElement = document.createElement('div')
+        domElement = @_document.createElement('div')
 
         # Add the specified CSS classes
         if classNames and classNames.length > 0

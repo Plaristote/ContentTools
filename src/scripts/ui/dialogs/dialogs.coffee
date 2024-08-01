@@ -21,7 +21,7 @@ class ContentTools.AnchoredDialogUI extends ContentTools.WidgetUI
         # appropriate point.
 
         # Create the dialog
-        @_domElement = @constructor.createDiv([
+        @_domElement = @createDiv([
             'ct-widget',
             'ct-anchored-dialog'
             ])
@@ -61,8 +61,8 @@ class ContentTools.AnchoredDialogUI extends ContentTools.WidgetUI
         halfWidth = (rect.width / 2 + 5)
 
         # Get the width of the document excluding the scroll bars
-        pageWidth = document.documentElement.clientWidth or
-            document.body.clientWidth
+        pageWidth = @_document.documentElement.clientWidth or
+            @_document.body.clientWidth
 
         # Adjust the position to be contained (if necessary)
         if (@_position[0] + halfWidth) > pageWidth
@@ -131,8 +131,8 @@ class ContentTools.DialogUI extends ContentTools.WidgetUI
 
         # Blur the focused element to ensure that it's contents can be edited
         # once the dialog is open.
-        if document.activeElement
-            document.activeElement.blur()
+        if @_document.activeElement
+            @_document.activeElement.blur()
 
             # HACK: This is a work around for blurring the contenteditable
             # element in webkit, thanks to Marek Suscak's fiddle here:
@@ -148,36 +148,36 @@ class ContentTools.DialogUI extends ContentTools.WidgetUI
             ]
         if @_busy
             dialogCSSClasses.push('ct-dialog--busy')
-        @_domElement = @constructor.createDiv(dialogCSSClasses)
+        @_domElement = @createDiv(dialogCSSClasses)
         @parent().domElement().appendChild(@_domElement)
 
         # Add the dialog header
-        domHeader = @constructor.createDiv(['ct-dialog__header'])
+        domHeader = @createDiv(['ct-dialog__header'])
         @_domElement.appendChild(domHeader)
 
         # Caption
-        @_domCaption = @constructor.createDiv(['ct-dialog__caption'])
+        @_domCaption = @createDiv(['ct-dialog__caption'])
         domHeader.appendChild(@_domCaption)
         @caption(@_caption)
 
         # Close button
-        @_domClose = @constructor.createDiv(['ct-dialog__close'])
+        @_domClose = @createDiv(['ct-dialog__close'])
         domHeader.appendChild(@_domClose)
 
         # Body
-        domBody = @constructor.createDiv(['ct-dialog__body'])
+        domBody = @createDiv(['ct-dialog__body'])
         @_domElement.appendChild(domBody)
 
         # View
-        @_domView = @constructor.createDiv(['ct-dialog__view'])
+        @_domView = @createDiv(['ct-dialog__view'])
         domBody.appendChild(@_domView)
 
         # Controls
-        @_domControls = @constructor.createDiv(['ct-dialog__controls'])
+        @_domControls = @createDiv(['ct-dialog__controls'])
         domBody.appendChild(@_domControls)
 
         # Busy
-        @_domBusy = @constructor.createDiv(['ct-dialog__busy'])
+        @_domBusy = @createDiv(['ct-dialog__busy'])
         @_domElement.appendChild(@_domBusy)
 
     unmount: () ->
@@ -207,7 +207,7 @@ class ContentTools.DialogUI extends ContentTools.WidgetUI
             if ev.keyCode is 27
                 @dispatchEvent(@createEvent('cancel'))
 
-        document.addEventListener('keyup', @_handleEscape)
+        @_document.addEventListener('keyup', @_handleEscape)
 
         # Via the close button
         @_domClose.addEventListener 'click', (ev) =>
@@ -221,4 +221,4 @@ class ContentTools.DialogUI extends ContentTools.WidgetUI
 
     _removeDOMEventListeners: () ->
 
-        document.removeEventListener('keyup', @_handleEscape)
+        @_document.removeEventListener('keyup', @_handleEscape)

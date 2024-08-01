@@ -57,7 +57,7 @@ class ContentTools.IgnitionUI extends ContentTools.WidgetUI
         super()
 
         # Base widget component
-        @_domElement = @constructor.createDiv([
+        @_domElement = @createDiv([
             'ct-widget',
             'ct-ignition',
             'ct-ignition--ready'
@@ -65,28 +65,28 @@ class ContentTools.IgnitionUI extends ContentTools.WidgetUI
         @parent().domElement().appendChild(@_domElement)
 
         # Edit button
-        @_domEdit = @constructor.createDiv([
+        @_domEdit = @createDiv([
             'ct-ignition__button',
             'ct-ignition__button--edit'
             ])
         @_domElement.appendChild(@_domEdit)
 
         # Confirm button
-        @_domConfirm = @constructor.createDiv([
+        @_domConfirm = @createDiv([
             'ct-ignition__button',
             'ct-ignition__button--confirm'
             ])
         @_domElement.appendChild(@_domConfirm)
 
         # Cancel button
-        @_domCancel = @constructor.createDiv([
+        @_domCancel = @createDiv([
             'ct-ignition__button',
             'ct-ignition__button--cancel'
             ])
         @_domElement.appendChild(@_domCancel)
 
         # Busy
-        @_domBusy = @constructor.createDiv([
+        @_domBusy = @createDiv([
             'ct-ignition__button',
             'ct-ignition__button--busy'
             ])
