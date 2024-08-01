@@ -687,7 +687,8 @@ class ContentTools.Tools.AlignLeft extends ContentTools.Tool
         alignmentClassNames = [
             ContentTools.Tools.AlignLeft.className,
             ContentTools.Tools.AlignCenter.className,
-            ContentTools.Tools.AlignRight.className
+            ContentTools.Tools.AlignRight.className,
+            ContentTools.Tools.AlignJustify.className
             ]
         for className in alignmentClassNames
             if element.hasCSSClass(className)
@@ -727,6 +728,16 @@ class ContentTools.Tools.AlignRight extends ContentTools.Tools.AlignLeft
     @label = 'Align right'
     @icon = 'align-right'
     @className = 'text-right'
+
+class ContentTools.Tools.AlignJustify extends ContentTools.Tools.AlignLeft
+
+    # Apply a class to right align the contents of the current text block.
+
+    ContentTools.ToolShelf.stow(@, 'align-justify')
+
+    @label = 'Align justify'
+    @icon = 'align-justify'
+    @className = 'text-justify'
 
 
 class ContentTools.Tools.UnorderedList extends ContentTools.Tool

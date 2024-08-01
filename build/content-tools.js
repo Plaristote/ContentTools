@@ -10010,7 +10010,7 @@
       if ((_ref = element.type()) === 'ListItemText' || _ref === 'TableCellText') {
         element = element.parent();
       }
-      alignmentClassNames = [ContentTools.Tools.AlignLeft.className, ContentTools.Tools.AlignCenter.className, ContentTools.Tools.AlignRight.className];
+      alignmentClassNames = [ContentTools.Tools.AlignLeft.className, ContentTools.Tools.AlignCenter.className, ContentTools.Tools.AlignRight.className, ContentTools.Tools.AlignJustify.className];
       for (_i = 0, _len = alignmentClassNames.length; _i < _len; _i++) {
         className = alignmentClassNames[_i];
         if (element.hasCSSClass(className)) {
@@ -10064,6 +10064,25 @@
     AlignRight.className = 'text-right';
 
     return AlignRight;
+
+  })(ContentTools.Tools.AlignLeft);
+
+  ContentTools.Tools.AlignJustify = (function(_super) {
+    __extends(AlignJustify, _super);
+
+    function AlignJustify() {
+      return AlignJustify.__super__.constructor.apply(this, arguments);
+    }
+
+    ContentTools.ToolShelf.stow(AlignJustify, 'align-justify');
+
+    AlignJustify.label = 'Align justify';
+
+    AlignJustify.icon = 'align-justify';
+
+    AlignJustify.className = 'text-justify';
+
+    return AlignJustify;
 
   })(ContentTools.Tools.AlignLeft);
 
