@@ -849,13 +849,13 @@ class _EditorApp extends ContentTools.ComponentUI
 
         if save
             @save()
-        else
+        else if @history
             # If revert returns false then we cancel the stop action
             if not @revert()
                 return
 
         # Clear history
-        @history.stopWatching()
+        @history.stopWatching() if @history
         @history = null
 
         # Hide the editing tools

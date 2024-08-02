@@ -8973,12 +8973,14 @@
       }
       if (save) {
         this.save();
-      } else {
+      } else if (this.history) {
         if (!this.revert()) {
           return;
         }
       }
-      this.history.stopWatching();
+      if (this.history) {
+        this.history.stopWatching();
+      }
       this.history = null;
       this._toolbox.hide();
       this._inspector.hide();
